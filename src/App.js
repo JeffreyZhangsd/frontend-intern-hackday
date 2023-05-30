@@ -111,6 +111,7 @@ function App() {
           return (
             <>
               <Card
+                selected={selected}
                 commitList={commitList}
                 clickHandler={clickHandler}
                 repo={repo}

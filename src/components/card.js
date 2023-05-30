@@ -12,6 +12,7 @@ const Card = ({
   clickHandler,
   commits_url,
   commitList,
+  selected,
 }) => {
   const date = new Date(created_at);
   return (
@@ -22,16 +23,21 @@ const Card = ({
         Created at: {date.toLocaleString()}
       </p>
       <p className="card_desc">{description}</p>
-      {commitList.map((commit) => (
-        <CommitCard
-          commit={commit}
-          key={commit.node_id}
-          message={commit.commit.message}
-          author={commit.commit.author.name}
-          hash={commit.commit.tree.sha}
-          date={commit.commit.author.date}
-        />
-      ))}
+      {commitList.map((commit) => {
+        if (selected !== commits_url) {
+          return;
+        }
+        return (
+          <CommitCard
+            commit={commit}
+            key={commit.node_id}
+            message={commit.commit.message}
+            author={commit.commit.author.name}
+            hash={commit.commit.tree.sha}
+            date={commit.commit.author.date}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -47,4 +53,5 @@ Card.propTypes = {
   clickHandler: PropTypes.func.isRequired,
   commits_url: PropTypes.string.isRequired,
   commitList: PropTypes.arrayOf(PropTypes.shape()),
+  selected: PropTypes.string,
 };
