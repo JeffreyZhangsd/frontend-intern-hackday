@@ -168,8 +168,7 @@ label {
 */
 
 .card {
-  margin-left: 5ch;
-  margin-bottom: 1ch;
+  margin: 1ch 5ch;
   justify-content: center;
   border: 1px solid black;
   border-radius: 10px;
@@ -183,4 +182,12 @@ label {
 }
 .repo_name {
   margin-left: 5px;
+}
+
+#commitcard {
+  margin-left: 10px;
+}
+
+.commitlist {
+  margin-left: 10px;
 }

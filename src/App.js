@@ -4,9 +4,10 @@ import Card from "./components/card";
 // import "dotenv/config";
 
 function App() {
+  // defaulting to Netflix
   const [search, setSearch] = useState("Netflix");
   const [repoList, setRepoList] = useState([]);
-  // using a usestate for commit list sets commitlist for every single card
+  // using a usestate for commit list and selected to get individual lists
   const [commitList, setCommitList] = useState([]);
   const [selected, setSelected] = useState(null);
 
@@ -28,6 +29,8 @@ function App() {
       throw Error(res.statusText);
     }
   };
+  // options if needed (rate limit issues)
+  // tried to use dotenv for security, ran into issues
   const options = {
     headers: new Headers({
       // 'Authorization': 'Token INSERT_GITHUB_TOKEN_HERE'
@@ -46,7 +49,7 @@ function App() {
       })
       .catch((err) => console.error("error fetching repo data: ", err));
   };
-
+  // fetch given url commit data
   const getCommitData = (url) => {
     fetch(url, options)
       .then((res) => checkData(res))
@@ -65,7 +68,6 @@ function App() {
 
   // clickHandler for showing commits
   const clickHandler = (url) => {
-    console.log(selected);
     if (selected === url) {
       setCommitList([]);
       setSelected(null);
@@ -73,10 +75,6 @@ function App() {
       setSelected(url);
       url = url.replace("{/sha}", "");
       getCommitData(url);
-    }
-
-    if (selected === url) {
-      console.log("selected");
     }
   };
 
